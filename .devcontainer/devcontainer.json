@@ -8,13 +8,18 @@
   // Forward ports 5173 (Vite), 6080 (desktop-lite), and 9323 (Playwright).
   // This allows us to access the services from outside of our dev container
   "forwardPorts": [5173, 6080, 9323],
+  "containerEnv": {
+    "VITE_HOST": "0.0.0.0",
+    "PLAYWRIGHT_HTML_HOST": "0.0.0.0",
+    "PW_TEST_HTML_REPORT_HOST": "0.0.0.0"
+  },
   // `features` provides a way to add automatically tools to a container.
   // We add "desktop-lite", which gives Playwright a place to display windows.
   // We can access the desktop through port 6080.
   "features": {
     "desktop-lite": {
-      "webPort": "6080",
-    },
+      "webPort": "6080"
+    }
   },
   // Runs `npm install` in the container before accessing it.
   "postStartCommand": "npm install",
@@ -22,7 +27,7 @@
   // Here, we tell VS Code to install the Playwright extension into the container.
   "customizations": {
     "vscode": {
-      "extensions": ["ms-playwright.playwright"],
-    },
-  },
+      "extensions": ["ms-playwright.playwright"]
+    }
+  }
 }

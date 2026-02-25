@@ -10,4 +10,7 @@ export default defineConfig({
       requireEnv: false,
     }),
   ],
+  server: {
+    host: process.env.VITE_HOST || 'localhost',
+  },
 });
