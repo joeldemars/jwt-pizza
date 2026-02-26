@@ -66,6 +66,11 @@ async function basicInit(page: Page) {
         }
     });
 
+    // Return  user
+    await page.route("*/**/api/user/*", async (route) => {
+        await route.fulfill({ json: validUsers["d@jwt.com"] });
+    });
+
     // Return the currently logged in user
     await page.route("*/**/api/user/me", async (route) => {
         // expect(route.request().method()).toBe('GET');
@@ -192,32 +197,32 @@ async function basicInit(page: Page) {
 }
 
 async function loginAsAdmin(page: Page) {
-  await basicInit(page);
+    await basicInit(page);
 
-  await page.getByRole('link', { name: 'Login' }).click();
-  await page.getByRole('textbox', { name: 'Email address' }).fill('a@jwt.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('admin');
-  await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('link', { name: 'Login' }).click();
+    await page.getByRole('textbox', { name: 'Email address' }).fill('a@jwt.com');
+    await page.getByRole('textbox', { name: 'Password' }).fill('admin');
+    await page.getByRole('button', { name: 'Login' }).click();
 
-  await page.getByRole('link', { name: 'Admin' }).click();
+    await page.getByRole('link', { name: 'Admin' }).click();
 }
 
 async function loginAsDiner(page: Page) {
-  await basicInit(page);
+    await basicInit(page);
 
-  await page.getByRole('link', { name: 'Login' }).click();
-  await page.getByRole('textbox', { name: 'Email address' }).fill('d@jwt.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('a');
-  await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('link', { name: 'Login' }).click();
+    await page.getByRole('textbox', { name: 'Email address' }).fill('d@jwt.com');
+    await page.getByRole('textbox', { name: 'Password' }).fill('a');
+    await page.getByRole('button', { name: 'Login' }).click();
 }
 
 async function loginAsFranchisee(page: Page) {
-  await basicInit(page);
+    await basicInit(page);
 
-  await page.getByRole('link', { name: 'Login' }).click();
-  await page.getByRole('textbox', { name: 'Email address' }).fill('f@jwt.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('f');
-  await page.getByRole('button', { name: 'Login' }).click();
+    await page.getByRole('link', { name: 'Login' }).click();
+    await page.getByRole('textbox', { name: 'Email address' }).fill('f@jwt.com');
+    await page.getByRole('textbox', { name: 'Password' }).fill('f');
+    await page.getByRole('button', { name: 'Login' }).click();
 }
 
 export { basicInit, loginAsAdmin, loginAsDiner, loginAsFranchisee };
