@@ -87,10 +87,11 @@ test('about', async ({ page }) => {
 test('display franchise', async ({ page }) => {
   await loginAsAdmin(page);
 
-  await expect(page.getByRole('table')).toContainText('LotaPizza');
-  await expect(page.getByRole('table')).toContainText('Lehi');
-  await expect(page.getByRole('table')).toContainText('Springville');
-  await expect(page.getByRole('table')).toContainText('American Fork');
+  await expect(page.getByRole('main')).toContainText('Franchises');
+  await expect(page.getByRole('main')).toContainText('LotaPizza');
+  await expect(page.getByRole('main')).toContainText('Lehi');
+  await expect(page.getByRole('main')).toContainText('Springville');
+  await expect(page.getByRole('main')).toContainText('American Fork');
 });
 
 test('add franchise', async ({ page }) => {

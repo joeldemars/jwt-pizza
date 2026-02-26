@@ -71,6 +71,13 @@ async function basicInit(page: Page) {
         await route.fulfill({ json: validUsers["d@jwt.com"] });
     });
 
+    await page.route("*/**/api/user*", async (route) => {
+        await route.fulfill({ json: {
+            users: Object.values(validUsers),
+            more: false,
+        }});
+    });
+
     // Return the currently logged in user
     await page.route("*/**/api/user/me", async (route) => {
         // expect(route.request().method()).toBe('GET');
