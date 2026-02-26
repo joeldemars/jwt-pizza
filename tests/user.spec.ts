@@ -1,5 +1,5 @@
 import { test, expect } from 'playwright-test-coverage';
-import { basicInit, loginAsDiner } from './util';
+import { loginAsAdmin, loginAsDiner } from './util';
 
 test('updateUser', async ({ page }) => {
   await loginAsDiner(page);
@@ -23,4 +23,18 @@ test('updateUser', async ({ page }) => {
   await page.waitForSelector('[role="dialog"].hidden', { state: 'attached' });
 
   await expect(page.getByRole('main')).toContainText('pizza dinerx');
+});
+
+test('list users on admin dashboard', async ({ page }) => {
+  await loginAsAdmin(page);
+
+  await expect(page.getByRole('main')).toContainText('Users');
+  
+  await expect(page.getByRole('main')).toContainText('Kai Chen');
+  await expect(page.getByRole('main')).toContainText('d@jwt.com');
+  await expect(page.getByRole('main')).toContainText('diner');
+
+  await expect(page.getByRole('main')).toContainText('Test Admin');
+  await expect(page.getByRole('main')).toContainText('a@jwt.com');
+  await expect(page.getByRole('main')).toContainText('admin');
 });
