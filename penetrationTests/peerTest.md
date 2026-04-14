@@ -70,6 +70,66 @@ Partner 2: Joel Demars
 
 ### Peer Attacks - Luke Chamberlain on Joel Demars
 
+#### Peer Attack 1
+
+| Item           | Result                                      |
+| -------------- | ------------------------------------------- |
+| Date           | April 14, 2026                              |
+| Target         | pizza.joeldemars.com                        |
+| Classification | Security Misconfiguration                   |
+| Severity       | 3                                           |
+| Description    | Logged in as admin with default credentials |
+| Images         | ![login](login.png)                         |
+| Corrections    | change default password and user            |
+
+#### Peer Attack 2
+
+| Item           | Result                                        |
+| -------------- | --------------------------------------------- |
+| Date           | April 14, 2026                                |
+| Target         | pizza.joeldemars.com                          |
+| Classification | Security Misconfiguration                     |
+| Severity       | 4                                             |
+| Description    | was able to get database configuration        |
+| Images         | ![database](databaseexposed.png)              |
+| Corrections    | Delete database hostname from /docs endpoint. |
+
+#### Peer Attack 3
+
+| Item           | Result                                             |
+| -------------- | -------------------------------------------------- |
+| Date           | April 14, 2026                                     |
+| Target         | pizza.joeldemars.com                               |
+| Classification | Insecure Design                                    |
+| Severity       | 3                                                  |
+| Description    | made an order for negative -1000 bitcoin per pizza |
+| Images         | ![invalid order](invalidorder.png)                 |
+| Corrections    | verify order validity                              |
+
+#### Peer Attack 4
+
+| Item           | Result                                                           |
+| -------------- | ---------------------------------------------------------------- |
+| Date           | April 14, 2026                                                   |
+| Target         | pizza.joeldemars.com                                             |
+| Classification | security misconfiguration                                        |
+| Severity       | 0                                                                |
+| Description    | tried to get the stack error trace from an unauthorized request. |
+| Images         | ![failed stacktrace](failedstacktrace.png)                       |
+| Corrections    | already corrected                                                |
+
+#### Peer Attack 5
+
+| Item           | Result                                                  |
+| -------------- | ------------------------------------------------------- |
+| Date           | April 14, 2026                                          |
+| Target         | pizza.joeldemars.com                                    |
+| Classification | Injection                                               |
+| Severity       | 0                                                       |
+| Description    | failed injection                                        |
+| Images         | ![failed injection](failedInjection.png)                |
+| Corrections    | need to secure database because it is still vulnearable |
+
 ### Peer Attacks - Joel Demars on Luke Chamberlain
 
 | Item           | Result                                      |
@@ -123,3 +183,5 @@ Partner 2: Joel Demars
 | Corrections    | Sanitize input                                                   |
 
 ### Summary
+
+In the course of this deliverable, we learned about how to use pentesting tools (such as Burp suite) to attack a web server. It surprised me how easy it was to find vulnerabilities with rather little effort. Almost any small oversight or poor design choice can be weaponized. It's important to design the system with resilience in mind; when making decisions about how a system will be implemented, the best way to make it secure is to assume that all users will be acting maliciously. Anything as simple as just trusting the requests that the user sends without verifying them against the database or forgetting to authenticate a user on one endpoint can lead to loss of data and money.
